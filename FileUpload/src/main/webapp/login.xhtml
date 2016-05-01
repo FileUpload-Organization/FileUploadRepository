@@ -1,0 +1,35 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+"http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:p="http://primefaces.org/ui">
+
+<h:head>
+	<title>File Upload</title>
+</h:head>
+
+<h:body>
+	<h:form id="form">
+		<h:panelGrid id="panel" columns="1" border="0" cellpadding="10"
+			cellspacing="1">
+			<p:inputText id="username" required="true" label="username" size="20"
+				requiredMessage="Please enter your username."
+				value="#{loginBean.username}">
+				<f:validateLength minimum="3" maximum="20" />
+			</p:inputText>
+			<p:watermark for="username" value="Username *" />
+
+			<p:message for="username" />
+
+			<p:password id="nonFeedback" value="#{loginBean.password}" size="20" />
+			<f:facet name="footer">
+				<h:panelGroup style="display:block; text-align:center">
+					<p:commandButton value="Login" action="#{loginBean.login}"
+						ajax="false" />
+				</h:panelGroup>
+			</f:facet>
+		</h:panelGrid>
+	</h:form>
+</h:body>
+</html>
