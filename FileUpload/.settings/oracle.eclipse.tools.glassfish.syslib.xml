@@ -1,0 +1,4 @@
+<?xml version="1.0" encoding="UTF-8" standalone="yes"?>
+<system-libraries>
+    <library path="C:/glassfish-4.1.1-web/glassfish4/glassfish/modules/glassfish-api.jar" source="C:/Users/Ugur/.m2/repository/org/glassfish/main/common/glassfish-api/4.1.1/glassfish-api-4.1.1-sources.jar"/>
+</system-libraries>

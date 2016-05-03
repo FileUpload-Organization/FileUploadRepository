@@ -5,23 +5,42 @@ import java.io.FileOutputStream;
 import java.io.IOException;
 import java.io.InputStream;
 import java.io.OutputStream;
+import java.io.Serializable;
+import java.util.List;
 
+import javax.annotation.PostConstruct;
+import javax.enterprise.context.SessionScoped;
 import javax.faces.application.FacesMessage;
-import javax.faces.bean.ManagedBean;
 import javax.faces.context.FacesContext;
+import javax.inject.Inject;
+import javax.inject.Named;
 
+import org.fileupload.ejb.ShowInformation;
+import org.fileupload.model.Users;
 import org.primefaces.event.FileUploadEvent;
 
-@ManagedBean(name = "fileUploadBean")
-public class FileUploadBean {
-	private String destination = "C:/UploadedFilesLocation/";
+@Named
+@SessionScoped
+public class FileUploadBean implements Serializable {
 
+	/**
+	 * 
+	 */
+	private static final long serialVersionUID = 1L;
+	private String destination = "C:/UploadedFilesLocation/";
+	private List<Users> usersList;
+
+	@Inject
+	private ShowInformation showInformation;
+	
+	
 	public FileUploadBean() {
 		File f = new File(destination);
 		if (!f.exists())
 			f.mkdir();
 	}
-
+	
+	
 	public void upload(FileUploadEvent event) {
 		FacesMessage msg = new FacesMessage("Success! ", event.getFile().getFileName() + " is uploaded.");
 		FacesContext.getCurrentInstance().addMessage(null, msg);
@@ -55,4 +74,22 @@ public class FileUploadBean {
 			System.out.println(e.getMessage());
 		}
 	}
+
+	@PostConstruct
+	public void fillList() {
+		try {
+			usersList = showInformation.getUsersList();
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+	}
+
+	public List<Users> getUsersList() {
+		return usersList;
+	}
+
+	public void setUsersList(List<Users> usersList) {
+		this.usersList = usersList;
+	}
+
 }

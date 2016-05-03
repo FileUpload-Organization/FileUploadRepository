@@ -9,12 +9,36 @@
 
 <h:body>
 	<h:form id="form">
-		<p:panel id="panel" header="User" style="margin-bottom:20px">
+		<p:panel id="panel1" header="User" style="margin-bottom:20px">
 			<p:fileUpload fileUploadListener="#{fileUploadBean.upload}"
 				allowTypes="/(\.|\/)(gif|jpe?g|png)$/" sizeLimit="100000"
 				description="Select Images" />
 			<p>Welcome #{loginBean.user.cname}</p>
 			<p:commandButton action="#{loginBean.logout}" value="Logout" />
+		</p:panel>
+		
+		<p:panel id="panel2" header="User" style="margin-bottom:20px">
+			<p:dataTable var="user" value="#{fileUploadBean.usersList}">
+				<p:column headerText="Id">
+					<h:outputText value="#{user.uuid}" />
+				</p:column>
+
+				<p:column headerText="Name">
+					<h:outputText value="#{user.cname}" />
+				</p:column>
+
+				<p:column headerText="Surname">
+					<h:outputText value="#{user.csurname}" />
+				</p:column>
+
+				<p:column headerText="Gender">
+					<h:outputText value="#{user.gender}" />
+				</p:column>
+				
+				<p:column headerText="Crate Date">
+					<h:outputText value="#{user.createdate}" />
+				</p:column>
+			</p:dataTable>
 		</p:panel>
 	</h:form>
 </h:body>
